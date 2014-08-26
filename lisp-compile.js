@@ -393,12 +393,13 @@
   }
   
   function varp(a){
-    return $.strp(a) && $.has(/^[a-zA-Z$_][a-zA-Z0-9$_?-]*$/, a);
+    return $.strp(a) && $.has(/^\*?[a-zA-Z$_][a-zA-Z0-9$_?-]*\*?$/, a);
   }
   
   function jvar(a){
     if (jvarp(a))return a;
     if (varp(a)){
+      if (beg(a, "*") || $.end(a, "*"))return $.upp($.mid(a));
       var s = "";
       for (var i = 0; i < $.len(a); i++){
         if (a[i] == "-"){
