@@ -1170,6 +1170,21 @@
   cmps("(js-mac cal a `(js-cal ,@a))");
   cmps("(js-mac # a `(js-# ,@a))");
   
+  function cmpf(a){
+    return cmps($.get(a));
+  }
+  
+  function cmpfi(a){
+    return cmpsi($.get(a));
+  }
+  
+  cmpf($.libdir + "/lisp-compile/lisp-cmp-core.lisp");
+  
+  // s is a lisp str
+  function jsCompile(s){
+    L.prn(cmpsi(L.dat(s)));
+  }
+  
   ////// JS functions //////
   
   /*jn({
@@ -1185,7 +1200,7 @@
   
   ////// Object exposure //////
   
-  $.att({
+  $.att(L, {
     cmpx: cmpx,
     cmpx1: cmpx1,
     cmp: cmp,
@@ -1197,8 +1212,9 @@
     
     blkp: blkp,
     retp: retp,
-    thrp: thrp
-  }, L);
+    thrp: thrp,
+    jsCompile: jsCompile
+  });
   
   ////// Testing //////
   
